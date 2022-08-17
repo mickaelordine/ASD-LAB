@@ -1,0 +1,27 @@
+INSERIRE ITALIANDISTGRAPH IN ES4
+
+
+-   spiegazione inmplementazione es 4:
+
+
+while(!minHeap.isEmpty()){
+      tempArch = minHeap.extractMin();
+      for(Arch<T,G> arch : g.getAdjacentVertex(tempArch.getEnd())){
+      //dist[v] > dist[u] + dist(u+v)
+      // V->vertex getAdjacentVertex
+      // U->MinHeap removed
+      //contains verifico che cò che ho rimosso esiste in MAP
+      if(Arch.compare(map.get(arch.getEnd()),Arch.add(g.getEdgeLabel(tempArch.getEnd(),arch.getEnd()),tempArch.getWeight()))>0
+           && minHeap.contains(new Arch<>(arch.getEnd(),map.get(arch.getEnd())))){
+           minHeap.decreaseKey(new Arch<T, G>(arch.getEnd(),map.get(arch.getEnd())),new Arch<T, G>(arch.getEnd(),Arch.add(g.getEdgeLabel(tempArch.getEnd(),arch.getEnd()),tempArch.getWeight())));
+           map.replace(arch.getEnd(),Arch.add(g.getEdgeLabel(tempArch.getEnd(),arch.getEnd()),tempArch.getWeight())); //aggiorno il valore nella mappa
+                }
+            }
+        }
+
+
+1.  finchè il minheap non è vuoto, prendo il minimo e per ogni arco adiacente a dove va a finire tempArch
+2.  se l'arco attuale adiacente a tempArch è maggiore della somma tra la distanza di ((tempArch e arch attuale) + (il peso del temp arch)) && l'hashmap contiene quell'arco li allora_
+3.  decrementiamo il valore del peso dell'arco presente nel minHeap e Map con la nuovo somma della distanza che abbiamo trovato con il primo check dell'if
+4.  e sostituiamo nella hashmap al key con l'arco che ha peso maggiore rispetto a quello appena trovato, l'alrco con il peso minore appena trovato
+
