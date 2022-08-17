@@ -1,0 +1,1 @@
+.\main_ex2.exe ..\src\dictionary.txt ..\src\correctme.txt
